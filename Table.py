@@ -50,7 +50,7 @@ class TextTable:
         lines.append("│ " + " │ ".join(header_cells) + " │")
         if self.header_padding:
           lines.append("│ " + " │ ".join(header_padding_cells) + " │")
-        
+
 
         # Header separator
         lines.append("├" + "┼".join("─" * (w + 2) for w in col_widths) + "┤")
@@ -72,6 +72,7 @@ class TextTable:
 
         return lines
 
+
     def _align_text(self, text: str, width: int, align: str) -> str:
         """Align text within width"""
         if align == "right":
@@ -80,7 +81,7 @@ class TextTable:
             return text.center(width)
         return text.ljust(width)
 
-    
+
 class TextTables:
     def __init__(self, *tables: (list[dict] | list[list] | TextTable), inline = False):
         # Convert raw data to TextTable objects if needed
@@ -92,18 +93,18 @@ class TextTables:
                 self.tables.append(TextTable(t))
         self.inline = inline
 
-    def print(self):
+    def print(self, align="left"):
       if self.inline:
         print(self.group())
       else:
         for t in self.tables:
-          print("\n".join(t.render("left")))
+          print("\n".join(t.render(align)))
 
 
     def group(self, *tables: TextTable, spacing: int = 2, align: str = "left") -> str:
         """Render multiple tables horizontally side-by-side"""
         tables = self.tables
-        
+
         if not tables:
             return ""
 
