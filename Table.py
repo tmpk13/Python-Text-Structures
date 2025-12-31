@@ -1,5 +1,8 @@
 class TextTable:
     """Generate table from list of dicts or 2D array"""
+    """
+    Need to add dimensions to the table, currently does not work with non union compatible data
+    """
 
     def __init__(self, data: (list[dict] | list[list]), headers: list[str] = None, header_padding:bool = True):
         self.data = data
